@@ -1,0 +1,40 @@
+<h1>Show Vet</h1>
+
+
+<div id="card">
+  
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Veterinary_symbol.svg/1200px-Veterinary_symbol.svg.png" width="226" height="256" />
+    
+    <strong>Name:</strong>
+    <%= @vet.name %>
+    <br>
+  
+
+ 
+    <strong>Age:</strong>
+    <%= @vet.age %>
+    <br>
+
+ 
+    <strong>Email:</strong>
+    <%= @vet.email %>
+    <br>
+  
+
+ 
+    <strong>Specialities:</strong>
+    <%= @vet.specialities %>
+    <br>
+
+  
+    <strong>Sex:</strong>
+    <%= @vet.sex %>
+    <br>
+
+
+</div>
+
+
+<span><%= link "Edit", to: Routes.vet_path(@conn, :edit, @vet) %></span> |
+<span><%= link "Back", to: Routes.vet_path(@conn, :index) %></span>
