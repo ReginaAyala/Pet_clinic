@@ -22,6 +22,7 @@ defmodule PetClinicWeb.Router do
     resources "/pets", PetController
     get "/pets/by_type/:type", PetController, :index_by_type
     resources "/vets", VetController
+    resources "/owners", OwnerController
   end
 
   
