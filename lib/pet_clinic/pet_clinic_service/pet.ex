@@ -3,10 +3,11 @@ defmodule PetClinic.PetClinicService.Pet do
   import Ecto.Changeset
 
   schema "pets" do
-    field :age, :integer
+    field :age, :integer 
     field :name, :string
-    field :sex, :string
-    field :type, :string
+    field :sex, Ecto.Enum, values: [:male, :female]
+    #field :type, :string
+    belongs_to(:pet_type, PetClinic.PetClinicService.PetType, foreign_key: :type_id)
     belongs_to(:owner, PetClinic.PetClinicService.Owner)
     belongs_to(:preferred_expert, PetClinic.PetHealthExpert.Vet, foreign_key: :preferred_expert_id)
     timestamps()
