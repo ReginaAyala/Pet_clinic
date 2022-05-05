@@ -6,6 +6,7 @@ defmodule PetClinic.PetClinicService.Pet do
     field :age, :integer 
     field :name, :string
     field :sex, Ecto.Enum, values: [:male, :female]
+
     #field :type, :string
     belongs_to(:pet_type, PetClinic.PetClinicService.PetType, foreign_key: :type_id)
     belongs_to(:owner, PetClinic.PetClinicService.Owner)
@@ -17,8 +18,8 @@ defmodule PetClinic.PetClinicService.Pet do
   @doc false
   def changeset(pet, attrs \\%{}) do
     pet
-    |> cast(attrs, [:name, :age, :type, :sex])
-    |> validate_required([:name, :age, :type, :sex])
+    |> cast(attrs, [:name, :age, :type_id, :sex, :owner_id, :preferred_expert_id])
+    |> validate_required([:name, :age, :type_id, :sex, :owner_id, :preferred_expert_id])
     |> validate_number(:age, greater_than_or_equal_to: 0)
 
   end

@@ -24,7 +24,9 @@
 
  
     <strong>Specialities:</strong>
-    <%= @vet.specialities %>
+    <%= for speciality <- @vet.specialities do %>
+        <%= speciality.name_type %>
+    <% end %>
     <br>
 
   

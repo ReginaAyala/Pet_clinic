@@ -18,7 +18,7 @@ defmodule PetClinic.PetHealthExpert do
 
   """
   def list_vets do
-    Repo.all(Vet)
+    Repo.all(Vet) |> Repo.preload(:specialities)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule PetClinic.PetHealthExpert do
       ** (Ecto.NoResultsError)
 
   """
-  def get_vet!(id), do: Repo.get!(Vet, id)
+  def get_vet!(id), do: Repo.get!(Vet, id) |> Repo.preload(:specialities)
 
   @doc """
   Creates a vet.

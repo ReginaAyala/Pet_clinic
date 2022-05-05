@@ -14,12 +14,22 @@
 
   <li>
     <strong>Type:</strong>
-    <%= @pet.type %>
+    <%= @pet.pet_type.name_type %>
   </li>
 
   <li>
     <strong>Sex:</strong>
     <%= @pet.sex %>
+  </li>
+
+  <li>
+    <strong>Owner:</strong>
+    <%= @owner.name %>
+  </li>
+
+  <li>
+    <strong>Prefered expert:</strong>
+    <%= @vet.name %>
   </li>
 
 </ul>

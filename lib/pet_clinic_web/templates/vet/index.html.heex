@@ -18,7 +18,11 @@
       <td><%= vet.name %></td>
       <td><%= vet.age %></td>
       <td><%= vet.email %></td>
-      <td><%= vet.specialities %></td>
+    
+        <td><%= for speciality <- vet.specialities do %>
+        <%= speciality.name_type %>
+    <% end %>
+</td>
       <td><%= vet.sex %></td>
 
       <td>

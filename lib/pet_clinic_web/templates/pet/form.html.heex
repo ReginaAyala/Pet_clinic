@@ -13,13 +13,21 @@
   <%= number_input f, :age %>
   <%= error_tag f, :age %>
 
-  <%= label f, :type %>
-  <%= text_input f, :type %>
+  <%= label f, :type_id  %>
+  <%= select f, :type_id, Enum.map(@pet_types, fn x -> {x.name_type, x.id} end) %>
   <%= error_tag f, :type %>
 
   <%= label f, :sex %>
-  <%= text_input f, :sex %>
+  <%= select f, :sex, ["female", "male"] %>
   <%= error_tag f, :sex %>
+
+  <%= label f, :owner_id  %>
+  <%= select f, :owner_id, Enum.map(@owner, fn x -> {x.name, x.id} end) %>
+  <%= error_tag f, :owner %>
+
+  <%= label f, :preferred_expert_id  %>
+  <%= select f, :preferred_expert_id, Enum.map(@vet, fn x -> {x.name, x.id} end) %>
+  <%= error_tag f, :owner %>
 
   <div>
     <%= submit "Save" %>
