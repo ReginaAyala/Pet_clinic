@@ -140,9 +140,12 @@ defmodule PetClinic.AppointmentService.AppointmentService do
     vet =
       Vet
       |> where([v], v.id == ^id)
-      |> preload([appoinments: [pets: [:pet_type, :owner]]])
+      |> preload(appoinments: [pets: [:pet_type, :owner]])
       |> Repo.one()
       |> filter_appointments(schedule)
+  end
+
+  defp filter_appointments(nil, _) do
   end
 
   defp filter_appointments(vet, schedule) do
@@ -156,6 +159,5 @@ defmodule PetClinic.AppointmentService.AppointmentService do
       end)
 
     Map.replace!(vet, :appoinments, appointments)
-
   end
 end

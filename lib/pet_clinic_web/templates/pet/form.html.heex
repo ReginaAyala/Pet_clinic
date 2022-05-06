@@ -27,7 +27,7 @@
 
   <%= label f, :preferred_expert_id  %>
   <%= select f, :preferred_expert_id, Enum.map(@vet, fn x -> {x.name, x.id} end) %>
-  <%= error_tag f, :owner %>
+  <%= error_tag f, :preferred_expert %>
 
   <div>
     <%= submit "Save" %>
