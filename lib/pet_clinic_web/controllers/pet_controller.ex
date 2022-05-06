@@ -7,7 +7,7 @@ defmodule PetClinicWeb.PetController do
   alias PetClinic.PetClinicService.PetType
 
   def index(conn, _params) do
-    pets = PetClinicService.list_pets() 
+    pets = PetClinicService.list_pets()
     render(conn, "index.html", pets: pets)
   end
 
@@ -16,7 +16,13 @@ defmodule PetClinicWeb.PetController do
     pet_types = PetClinicService.list_pet_types()
     experts = PetClinic.PetHealthExpert.list_vets()
     owners = PetClinicService.list_owners()
-    render(conn, "new.html", changeset: changeset, pet_types: pet_types, owner: owners, vet: experts)
+
+    render(conn, "new.html",
+      changeset: changeset,
+      pet_types: pet_types,
+      owner: owners,
+      vet: experts
+    )
   end
 
   def create(conn, %{"pet" => pet_params}) do
@@ -72,5 +78,4 @@ defmodule PetClinicWeb.PetController do
     pet = PetClinicService.list_pets_by_type(type)
     render(conn, "index_by_type.html", pet: pet)
   end
-
 end

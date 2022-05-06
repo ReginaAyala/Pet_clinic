@@ -21,7 +21,13 @@ defmodule PetClinic.PetHealthExpertTest do
     end
 
     test "create_vet/1 with valid data creates a vet" do
-      valid_attrs = %{age: 42, email: "some email", name: "some name", sex: "some sex", specialities: "some specialities"}
+      valid_attrs = %{
+        age: 42,
+        email: "some email",
+        name: "some name",
+        sex: "some sex",
+        specialities: "some specialities"
+      }
 
       assert {:ok, %Vet{} = vet} = PetHealthExpert.create_vet(valid_attrs)
       assert vet.age == 42
@@ -37,7 +43,14 @@ defmodule PetClinic.PetHealthExpertTest do
 
     test "update_vet/2 with valid data updates the vet" do
       vet = vet_fixture()
-      update_attrs = %{age: 43, email: "some updated email", name: "some updated name", sex: "some updated sex", specialities: "some updated specialities"}
+
+      update_attrs = %{
+        age: 43,
+        email: "some updated email",
+        name: "some updated name",
+        sex: "some updated sex",
+        specialities: "some updated specialities"
+      }
 
       assert {:ok, %Vet{} = vet} = PetHealthExpert.update_vet(vet, update_attrs)
       assert vet.age == 43

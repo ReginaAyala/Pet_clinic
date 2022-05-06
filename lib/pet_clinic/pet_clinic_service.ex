@@ -106,8 +106,6 @@ defmodule PetClinic.PetClinicService do
     Repo.all(from p in Pet, where: p.type == ^type)
   end
 
-  
-
   alias PetClinic.PetClinicService.Owner
 
   @doc """
@@ -205,8 +203,8 @@ defmodule PetClinic.PetClinicService do
   end
 
   alias PetClinic.PetClinicService.PetType
-  
+
   def list_pet_types() do
-    Repo.all(PetType)  
+    Repo.all(PetType)
   end
 end

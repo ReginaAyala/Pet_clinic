@@ -18,14 +18,14 @@ defmodule PetClinicWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-  
+
     resources "/pets", PetController
     get "/pets/by_type/:type", PetController, :index_by_type
     resources "/vets", VetController
     resources "/owners", OwnerController
+    get "/healt_expert/:id_health_expert/schedule/:schedule", ScheduleController, :index
   end
 
-  
   # Other scopes may use custom stacks.
   # scope "/api", PetClinicWeb do
   #   pipe_through :api

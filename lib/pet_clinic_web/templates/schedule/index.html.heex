@@ -1,1 +1,22 @@
-<h1>List schedule</h1>
+<h1>Appointments for <%= get_expert_name(@schedule) %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient</th>
+      <th>Type</th>
+      <th>Owner</th>
+      <th>Hour Busy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for appoinment <- @schedule.appoinments do %>
+        <tr>
+            <td><%= appoinment.pets.name %></td>
+            <td><%= appoinment.pets.pet_type.name_type %></td>
+            <td><%= appoinment.pets.owner.name %></td>
+            <td><%= get_hour(appoinment.date_time)%> </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
