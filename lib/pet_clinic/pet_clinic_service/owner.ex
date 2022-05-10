@@ -1,4 +1,8 @@
 defmodule PetClinic.PetClinicService.Owner do
+  @moduledoc """
+   This is module Owner.
+   the data schema is created for a owner and the related with pet.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,9 @@
 defmodule PetClinic.PetClinicService.ExpertSpecialities do
+  @moduledoc """
+   This is module Expert Specialities.
+   the data schema is created for a expert specialities and the related with the pet type, 
+   and the vet.
+  """
   use Ecto.Schema
 
   schema "expert_specialities" do

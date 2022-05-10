@@ -1,4 +1,9 @@
 defmodule PetClinic.AppointmentService.AppointmentService do
+  @moduledoc """
+  This is module Appointment Service.
+  This module create an appointment with a veterinarian depending on your schedule 
+  and also search the appointments that the veterinarian has by date
+  """
   alias PetClinic.Repo
   alias PetClinic.PetHealthExpert.Vet
   alias PetClinic.AppoinmentService.ExpertSchedule
@@ -28,7 +33,7 @@ defmodule PetClinic.AppointmentService.AppointmentService do
         available =
           Enum.map(filter, fn f -> %{Enum.at(f, 2) => [Enum.at(f, 0), Enum.at(f, 1)]} end)
           |> Enum.map(fn date ->
-            Enum.map(date, fn {k, v} -> %{k => time_range(List.first(v), List.last(v))} end)
+          time_range(date)
           end)
           |> List.flatten()
 
@@ -42,12 +47,14 @@ defmodule PetClinic.AppointmentService.AppointmentService do
         available =
           Enum.map(filter, fn f -> %{Enum.at(f, 2) => [Enum.at(f, 0), Enum.at(f, 1)]} end)
           |> Enum.map(fn date ->
-            Enum.map(date, fn {k, v} -> %{k => time_range(List.first(v), List.last(v))} end)
+          time_range(date)
           end)
           |> List.flatten()
     end
   end
-
+  def time_range(date) do
+    Enum.map(date, fn {k, v} -> %{k => time_range(List.first(v), List.last(v))} end)
+  end
   def new_appointmen(id_expert, id_pet, timedate) do
     date = NaiveDateTime.to_date(timedate)
     time = NaiveDateTime.to_time(timedate)
@@ -64,28 +71,34 @@ defmodule PetClinic.AppointmentService.AppointmentService do
           Repo.get_by(Pet, id: id_pet) != nil ->
             slots = available_slots(id_expert, date, date)
 
-            is_there =
-              Enum.map(slots, fn slot ->
-                slot[date]
-                |> Enum.map(fn hour -> Time.truncate(hour, :second) end)
-                |> Enum.member?(time)
-              end)
-              |> Enum.member?(true)
-
-            cond do
-              is_there == true ->
-                chset = %Appointments{
-                  health_expert_id: id_expert,
-                  pet_id: id_pet,
-                  date_time: timedate
-                }
-
-                Repo.insert(chset)
-
-              is_there == false ->
-                {:error, "NO hour for this day"}
-            end
+          availability_slot(date, time, slots)
+          create_appointment(is_there)
+            
+           Repo.insert(chset)
+           is_there == false ->
+             {:error, "NO hour for this day"}    
         end
+    end
+  end
+
+  def availability_slot(date, time, slots) do
+    is_there =
+      Enum.map(slots, fn slot ->
+        slot[date]
+        |> Enum.map(fn hour -> Time.truncate(hour, :second) end)
+        |> Enum.member?(time)
+      end)
+      |> Enum.member?(true)
+  end
+
+  def create_appointment(is_there) do
+    cond do
+      is_there == true ->
+        chset = %Appointments{
+          health_expert_id: id_expert,
+          pet_id: id_pet,
+          date_time: timedate
+        }
     end
   end
 

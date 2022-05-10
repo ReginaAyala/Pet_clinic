@@ -1,4 +1,8 @@
 defmodule PetClinic.PetClinicService.PetType do
+  @moduledoc """
+  This is module Pet Type.
+  The schema for pet type and its related with the pet
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,6 +1,9 @@
 defmodule PetClinic.AppoinmentService.Appointments do
   use Ecto.Schema
 
+  @moduledoc """
+  This is module Appointments.
+  """
   schema "appointments" do
     field :date_time, :naive_datetime
     belongs_to :pets, PetClinic.PetClinicService.Pet, foreign_key: :pet_id

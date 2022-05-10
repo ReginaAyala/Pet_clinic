@@ -2,6 +2,11 @@ defmodule PetClinic.PetClinicService.Pet do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+   This is module Pet.
+   the data schema is created for a pet and the related with the veterinarian, 
+   the pet owner, type and appoinments.
+  """
   schema "pets" do
     field :age, :integer
     field :name, :string

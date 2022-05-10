@@ -1,6 +1,10 @@
 defmodule PetClinic.AppoinmentService.ExpertSchedule do
   use Ecto.Schema
 
+  @moduledoc """
+   This is module Expert schedule.
+  """
+
   schema "expert_schedule" do
     belongs_to :health_expert, PetClinic.PetHealthExpert.Vet, foreign_key: :health_expert_id
     field :monday_start, :time

@@ -50,7 +50,14 @@ defmodule PetClinicWeb.PetController do
     pet_types = PetClinicService.list_pet_types()
     owner = PetClinicService.list_owners()
     vet = PetHealthExpert.list_vets()
-    render(conn, "edit.html", pet: pet, changeset: changeset, pet_types: pet_types, owner: owner, vet: vet)
+
+    render(conn, "edit.html",
+      pet: pet,
+      changeset: changeset,
+      pet_types: pet_types,
+      owner: owner,
+      vet: vet
+    )
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do

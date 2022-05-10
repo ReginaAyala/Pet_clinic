@@ -1,4 +1,9 @@
 defmodule PetClinic.PetHealthExpert.Vet do
+  @moduledoc """
+   This is module Vet.
+   the data schema is created for a veterinarian and the related with the pet, 
+   the pet owner, their specialty and their appointments
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
