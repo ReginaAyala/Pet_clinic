@@ -11,4 +11,10 @@ defmodule PetClinic.PetClinicService.PetType do
     has_many :pets, PetClinic.PetClinicService.Pet, foreign_key: :type_id
     timestamps()
   end
+
+  def changeset(pet, attrs) do
+    pet
+    |> cast(attrs, [:name_type])
+    |> validate_required([:name_type])
+  end
 end

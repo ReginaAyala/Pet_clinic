@@ -1,4 +1,4 @@
-datedefmodule PetClinic.Repo.Migrations.CreateAppoinmentService do
+defmodule PetClinic.Repo.Migrations.CreateAppoinmentService do
   use Ecto.Migration
 
   def change do

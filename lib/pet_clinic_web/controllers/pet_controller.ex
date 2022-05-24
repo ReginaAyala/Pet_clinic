@@ -7,7 +7,7 @@ defmodule PetClinicWeb.PetController do
   alias PetClinic.PetClinicService.PetType
 
   def index(conn, _params) do
-    pets = PetClinicService.list_pets()
+    pets = PetClinicService.list_pets(:pet_type)
     render(conn, "index.html", pets: pets)
   end
 
@@ -26,6 +26,10 @@ defmodule PetClinicWeb.PetController do
   end
 
   def create(conn, %{"pet" => pet_params}) do
+    pet_types = PetClinicService.list_pet_types()
+    vet = PetClinic.PetHealthExpert.list_vets()
+    owner = PetClinicService.list_owners()
+
     case PetClinicService.create_pet(pet_params) do
       {:ok, pet} ->
         conn
@@ -33,15 +37,21 @@ defmodule PetClinicWeb.PetController do
         |> redirect(to: Routes.pet_path(conn, :show, pet))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html",
+          changeset: changeset,
+          pet_types: pet_types,
+          owner: owner,
+          vet: vet
+        )
     end
   end
 
   def show(conn, %{"id" => id}) do
-    pet = PetClinicService.get_pet!(id)
+    pet = PetClinicService.get_pet!(id, :pet_type)
+    pet_type = PetClinicService.get_pet!(id, :pet_type)
     owner = PetClinicService.get_owner!(pet.owner_id)
-    expert = PetClinic.PetHealthExpert.get_vet!(pet.preferred_expert_id)
-    render(conn, "show.html", pet: pet, owner: owner, vet: expert)
+    vet = PetClinic.PetHealthExpert.get_vet!(pet.preferred_expert_id)
+    render(conn, "show.html", pet: pet, owner: owner, vet: vet, pet: pet)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -62,6 +72,9 @@ defmodule PetClinicWeb.PetController do
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do
     pet = PetClinicService.get_pet!(id)
+    pet_types = PetClinicService.list_pet_types()
+    owner = PetClinicService.list_owners()
+    vet = PetHealthExpert.list_vets()
 
     case PetClinicService.update_pet(pet, pet_params) do
       {:ok, pet} ->
@@ -70,7 +83,13 @@ defmodule PetClinicWeb.PetController do
         |> redirect(to: Routes.pet_path(conn, :show, pet))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", pet: pet, changeset: changeset)
+        render(conn, "edit.html",
+          pet: pet,
+          changeset: changeset,
+          pet_types: pet_types,
+          owner: owner,
+          vet: vet
+        )
     end
   end
 

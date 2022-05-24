@@ -30,7 +30,7 @@ defmodule PetClinic.PetHealthExpert.Vet do
   def changeset(vet, attrs) do
     vet
     |> cast(attrs, [:name, :age, :email, :sex])
-    |> cast_assoc(:specialities, required: true)
+    # |> cast_assoc(:specialities, required: true)
     |> validate_required([:name, :age, :email, :sex])
   end
 end

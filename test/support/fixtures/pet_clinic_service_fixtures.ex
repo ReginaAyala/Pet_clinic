@@ -7,18 +7,38 @@ defmodule PetClinic.PetClinicServiceFixtures do
   @doc """
   Generate a pet.
   """
+
+  alias PetClinic.PetHealthExpertFixtures
+
   def pet_fixture(attrs \\ %{}) do
+    pet_type = type_fixture()
+    owner = owner_fixture()
+    vet = PetHealthExpertFixtures.vet_fixture()
+
     {:ok, pet} =
       attrs
       |> Enum.into(%{
         age: 42,
         name: "some name",
-        sex: "some sex",
-        type: "some type"
+        sex: :female,
+        type_id: pet_type.id,
+        owner_id: owner.id,
+        preferred_expert_id: vet.id
       })
       |> PetClinic.PetClinicService.create_pet()
 
     pet
+  end
+
+  def type_fixture(attrs \\ %{}) do
+    {:ok, type} =
+      attrs
+      |> Enum.into(%{
+        name_type: "some name"
+      })
+      |> PetClinic.PetClinicService.create_type()
+
+    type
   end
 
   @doc """
